@@ -23,7 +23,7 @@
                     <th>Tipo</th>
                     <th>Marca</th>
                     <th>Modelo</th>
-                    <th>ver solicitud</th>
+                    <th>Ver Solicitud</th>
                     <th>Estado</th>
                   </tr>
                   </thead>
@@ -38,10 +38,9 @@
                     <td>{{$datosSolicitudes->marca}}</td>
                     <td>{{$datosSolicitudes->modelo}}</td>
                     <td>    
-                      <span type="button" class="btn btn-primary btn-md" onclick="cargar_datos_modal('Antecedentes Solicitud','idFunc|idSop','{{$datosSolicitudes->funcSolicSop}}|{{$datosSolicitudes->idSolSop}}','verDetalleSoporte');">
+                      <center><span type="button" class="btn btn-primary btn-xs" onclick="cargar_datos_modal('Antecedentes Solicitud','idFunc|idSop','{{$datosSolicitudes->funcSolicSop}}|{{$datosSolicitudes->idSolSop}}','verDetalleSoporte');">
                        <i class="blue ace icon fa fa-expand"></i>
-                      </span>
-                     
+                      </span></center>
                     </td>
                    <td>
                     @if ($datosSolicitudes->estadoSop == 16 || $datosSolicitudes->estadoSop == 17)

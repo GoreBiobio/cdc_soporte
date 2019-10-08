@@ -21,7 +21,7 @@
                     <th>Fecha Solicitud</th>
                     <th>Hora Solicitud</th>
                     <th>Servicio</th>
-                    <th>ver solicitud</th>
+                    <th>Ver Solicitud</th>
                     <th>Estado</th>
                   </tr>
                   </thead>
@@ -34,9 +34,9 @@
                     <td>{{ date('H:i', strtotime($datosSolicitudes->fecCreaSolServ )) }}</td>
                     <td>{{$datosSolicitudes->servicio}}</td>
                     <td>    
-                      <span type="button" class="btn btn-primary btn-md" onclick="cargar_datos_modal('Antecedentes Solicitud','idFunc|idSolServ','{{$datosSolicitudes->funcSolServ}}|{{$datosSolicitudes->idSolServ}}','verDetalleSolicitudServicio');">
+                      <center><span type="button" class="btn btn-primary btn-xs" onclick="cargar_datos_modal('Antecedentes Solicitud','idFunc|idSolServ','{{$datosSolicitudes->funcSolServ}}|{{$datosSolicitudes->idSolServ}}','verDetalleSolicitudServicio');">
                        <i class="blue ace icon fa fa-expand"></i>
-                      </span>
+                      </span></center>
                     </td>
                    <td>
                    	@if ($datosSolicitudes->estadoSolServ == 16 || $datosSolicitudes->estadoSolServ == 17)

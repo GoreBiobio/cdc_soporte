@@ -12,6 +12,7 @@ use App\Exports\UsersExport;
 |
 */
 //Route::get('notification', 'HomeController@notification');
+route::get('/', 'pruebas@ingresar');
 route::get('/ingresar', 'pruebas@ingresar');
 route::get('/seleccion', 'pruebas@seleccion');
 route::get('/hola', 'pruebas@hola');
@@ -84,12 +85,6 @@ Route::get('/marca/{id}', function ($id){
 	->select('users.id', 'contacts.phone', 'orders.price')
 	->get();
 	});
-
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {

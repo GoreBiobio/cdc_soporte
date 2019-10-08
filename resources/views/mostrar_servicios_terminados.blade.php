@@ -21,7 +21,7 @@
                     <th>Fecha Solicitud</th>
                     <th>Hora Solicitud</th>
                     <th>Servicio</th>
-                    <th>ver solicitud</th>
+                    <th>Ver Solicitud</th>
                     <th>Estado</th>
                   </tr>
                   </thead>
@@ -34,10 +34,9 @@
                     <td>{{ date('H:i', strtotime($datosSolicitudes->fecCreaSolServ)) }}</td>
                     <td>{{$datosSolicitudes->servicio}}</td>
                     <td>    
-                      <span type="button" class="btn btn-primary btn-md" onclick="cargar_datos_modal('Servicio Terminado','idFunc|idServ','{{$datosSolicitudes->funcSolServ}}|{{$datosSolicitudes->idSolServ}}','verDetalleServicioTerminado');">
+                      <center><span type="button" class="btn btn-primary btn-xs" onclick="cargar_datos_modal('Servicio Terminado','idFunc|idServ','{{$datosSolicitudes->funcSolServ}}|{{$datosSolicitudes->idSolServ}}','verDetalleServicioTerminado');">
                        <i class="blue ace icon fa fa-expand"></i>
-                      </span>
-                     
+                      </span></center>
                     </td>
                    <td>
                     Terminado
