@@ -51,9 +51,11 @@ class solicitudSoporte extends Controller
       $tipo = 'soporte';
       $annio = date("Y");
       $file = $request->file('file_soporte');
+      
 
-      if(count($file) > 0){
 
+      if(isset($file)){
+        echo "entra";die;
         foreach ($file as $key => $value) {
         $nombre = $file[$key]->getClientOriginalName();
         $archivo = $file[$key];
