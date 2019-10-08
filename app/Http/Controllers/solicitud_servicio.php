@@ -41,7 +41,7 @@ class solicitud_servicio extends Controller
           $id_serv = $request->input("id_servicio");
           $id_func = $request->input("id_usuario");
           $estadoSolServ = "15";
-          DB::table('solicitud_Servicio')->insert([
+          DB::table('solicitud_servicio')->insert([
                 'fecCreaSolServ' => $fecha,
                 'solicitudServ' => $servicio,
                 'idServ' => $id_serv,

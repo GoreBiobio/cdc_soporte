@@ -131,7 +131,7 @@ class solicitudSoporte extends Controller
           $id_serv = $request->input("idserv".$indice);
           $id_func = $request->input("idFunc");
           $estadoSolServ = "1";
-          DB::table('solicitud_Servicio')->insert([
+          DB::table('solicitud_servicio')->insert([
                 'fecCreaSolServ' => $fecha,
                 'solicitudServ' => $servicio,
                 'idServ' => $id_serv,
@@ -171,7 +171,7 @@ class solicitudSoporte extends Controller
           $id_func = $request->input("id_usuario");
           $estadoSolServ = "15";
           
-          $solicitud = new solicitud_Servicio;
+          $solicitud = new solicitud_servicio;
           $solicitud->fecCreaSolServ = $fecha;
           $solicitud->solicitudServ = $servicio;
           $solicitud->idServ = $id_serv;
@@ -186,8 +186,7 @@ class solicitudSoporte extends Controller
           $annio = date("Y");
           $file = $request->file('file');
 
-
-          if(count($file) > 0){
+          if(isset($file)){
 
               foreach ($file as $key => $value) {
               $nombre = $file[$key]->getClientOriginalName();
@@ -231,7 +230,7 @@ class solicitudSoporte extends Controller
         $id_anula = $request->input("id_anula_servicio");
         $id_func = $request->input("idFunc");
         $estado=20;
-          DB::table('solicitud_Servicio')
+          DB::table('solicitud_servicio')
           ->where('idSolServ', '=',$id_anula)
           ->update(['estadoSolServ' => $estado]);
         session()->put('success','Se ha anulado su solicitud con exito.');
@@ -433,9 +432,9 @@ function retornaTiposServicios(){
 
 function buscarSolicitudesServicios($id_func){
 
-    $soliServicios = DB::table('solicitud_Servicio')
+    $soliServicios = DB::table('solicitud_servicio')
             ->select('*')
-            ->join('servicio', 'servicio.idServ', '=', 'solicitud_Servicio.idServ')
+            ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
             ->where([
                 ['funcSolServ','=',$id_func]
             ])
