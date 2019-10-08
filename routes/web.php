@@ -13,8 +13,9 @@ use App\Exports\UsersExport;
 */
 //Route::get('notification', 'HomeController@notification');
 Route::get('/', function () {
-    return redirect('/ingresar');
+    return view('vistasSolicitudesSoporte.ingresar');
 });
+
 route::get('/ingresar', 'pruebas@ingresar');
 route::get('/seleccion', 'pruebas@seleccion');
 route::get('/hola', 'pruebas@hola');
