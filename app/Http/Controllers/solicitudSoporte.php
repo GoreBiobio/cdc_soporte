@@ -55,7 +55,7 @@ class solicitudSoporte extends Controller
 
 
       if(isset($file)){
-        echo "entra";die;
+        
         foreach ($file as $key => $value) {
         $nombre = $file[$key]->getClientOriginalName();
         $archivo = $file[$key];
