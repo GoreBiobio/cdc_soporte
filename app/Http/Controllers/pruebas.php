@@ -149,11 +149,11 @@ class pruebas extends Controller
             ->select('idServ','servicio')
           ->get();  
 
-        $pedidoServicios = DB::table('solicitud_Servicio')
+        $pedidoServicios = DB::table('solicitud_servicio')
             ->select('*')
-            ->join('servicio', 'servicio.idServ', '=', 'solicitud_Servicio.idServ')
-            ->join('funcionarios','funcionarios.idFunc','=','solicitud_Servicio.funcSolServ')
-            ->join('estados','estados.idEstado','=','solicitud_Servicio.estadoSolServ')
+            ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
+            ->join('funcionarios','funcionarios.idFunc','=','solicitud_servicio.funcSolServ')
+            ->join('estados','estados.idEstado','=','solicitud_servicio.estadoSolServ')
             ->where([
                 ['rutFunc','=',$rut]
             ])
