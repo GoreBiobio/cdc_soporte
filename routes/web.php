@@ -12,7 +12,9 @@ use App\Exports\UsersExport;
 |
 */
 //Route::get('notification', 'HomeController@notification');
-route::get('/', 'pruebas@ingresar');
+Route::get('/', function () {
+    return redirect('/ingresar');
+});
 route::get('/ingresar', 'pruebas@ingresar');
 route::get('/seleccion', 'pruebas@seleccion');
 route::get('/hola', 'pruebas@hola');
