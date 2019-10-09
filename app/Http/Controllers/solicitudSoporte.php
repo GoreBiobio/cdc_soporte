@@ -7,7 +7,7 @@ use DateTime;
 use DB;
 use App\solicitud_servicio;
 use App\solicitudsoportes;
-
+session_start();
 class solicitudSoporte extends Controller
 {
 
@@ -25,7 +25,7 @@ class solicitudSoporte extends Controller
     {
 
     	$fecha = new DateTime;
-
+      $id_usuario = $_SESSION['id_usuario'];
     	$soporte = $request->input("soporte");
     	$criticidad = $request->input("criticidad");
     	$id_hard = $request->input("id_hard");
@@ -41,7 +41,7 @@ class solicitudSoporte extends Controller
       $solicitud_soporte->tipoSopD = $algo;
       $solicitud_soporte->estadoCritSop = $criticidad;
       $solicitud_soporte->estadoSop=$estadoSop;
-      $solicitud_soporte->funcSolicSop=$id_func;
+      $solicitud_soporte->funcSolicSop=$id_usuario;
       $solicitud_soporte->tipoSopB='Pendiente';
       $solicitud_soporte->tipoSopC='Pendiente';
 
@@ -164,7 +164,7 @@ class solicitudSoporte extends Controller
     {
 
           $fecha = new DateTime;
-
+          $id_usuario = $_SESSION['id_usuario'];
           $servicio = $request->input("motivo_solicitud_servicio");
           $criticidad = $request->input("criticidad");
           $id_serv = $request->input("id_servicio");
@@ -177,7 +177,7 @@ class solicitudSoporte extends Controller
           $solicitud->idServ = $id_serv;
           $solicitud->estadoCritSolServ = $criticidad;
           $solicitud->estadoSolServ = $estadoSolServ;
-          $solicitud->funcSolServ=$id_func;
+          $solicitud->funcSolServ=$id_usuario;
 
           $solicitud->save();
       

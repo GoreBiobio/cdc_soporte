@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+session_start();
 class inicio extends Controller
 {
     public function recibirRut(Request $request)
@@ -21,9 +22,10 @@ class inicio extends Controller
                  'rutinvalido' => $rutinvalido
             ]);
 	     }else{
-			    session_start();
+			    
 		    	$_SESSION["rut"]=$rut;
 		    	$numero_solicitudes = cargar_datos($rut);
+                $_SESSION["id_usuario"]=$numero_solicitudes[0];
     			return view('inicio',[
     		'soportes' => $numero_solicitudes[1],
     		'id'=>$numero_solicitudes[0],
@@ -35,10 +37,21 @@ class inicio extends Controller
 	     }
     }
 
+    public function salir(){
+        
+        session_destroy();
+        $rut = '';
+        $rutinvalido = '';
+        return view('vistasSolicitudesSoporte.ingresar',
+                ['rutIngresado' =>$rut,
+                 'rutinvalido' => $rutinvalido
+            ]);
+    }
+
     public function volver_inicio(Request $request)
     {	
 
-    	session_start();
+    	
         $rut = $_SESSION['rut'];
     	$numero_solicitudes = cargar_datos($rut);
     	return view('inicio',[

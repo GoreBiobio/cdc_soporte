@@ -12,9 +12,7 @@ use App\Exports\UsersExport;
 |
 */
 //Route::get('notification', 'HomeController@notification');
-Route::get('/', function () {
-    return view('vistasSolicitudesSoporte.ingresar');
-});
+
 
 route::get('/ingresar', 'pruebas@ingresar');
 route::get('/seleccion', 'pruebas@seleccion');
@@ -61,15 +59,12 @@ route::get('/consulta_servicios_pedidos', 'inicio@mostrar_pedidos_servicios');
 route::get('/verDetalleSolicitudServicio', 'inicio@verDetalleSolicitudServicio');
 
 
-
-
 route::get('/descargar2', 'pruebas@excel')->name('export_excel.excel');
 
 
 Route::get('/descargar', function () {
 	//return Excel::download(new ServicioExport(17), 'servicio.xlsx');
 	return (new ServicioExport(17))->download('servicio.xlsx');
-	
 
 });
 

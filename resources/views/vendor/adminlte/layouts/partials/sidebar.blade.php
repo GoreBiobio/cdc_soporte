@@ -17,7 +17,7 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="recibeRunInicio"><i class='fa fa-home'></i> <span>Inicio</span></a></li>
             <li><a href="recibeRun"><i class='fa fa-cogs'></i> <span>Consola de Soporte</span></a></li>
-            <li><a href="ingresar"><i class="fa fa-sign-out"></i><span>Cerrar Sesión</span></a></li>
+            <li><a href="salir"><i class="fa fa-sign-out"></i><span>Cerrar Sesión</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

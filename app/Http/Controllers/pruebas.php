@@ -120,7 +120,6 @@ class pruebas extends Controller
              ->join('divisiones','divisiones.idDiv','=','departamentos.divisiones_idDiv')
              ->where('rutFunc', '=', $rut)
              ->get();
-
         $datosHard = DB::table('funcionarios')
             ->join('comodatos', 'funcionarios.idFunc', '=', 'comodatos.funcRecibeComod')
             ->join('hardwares', 'hardwares.idHard', '=', 'comodatos.hardwares_idHard')
@@ -146,8 +145,8 @@ class pruebas extends Controller
 
 
         $tiposServicios= DB::table('servicio')
-            ->select('idServ','servicio')
-          ->get();  
+            ->select('idServ','servicio','ind_critico')
+          ->get(); 
 
         $pedidoServicios = DB::table('solicitud_servicio')
             ->select('*')
@@ -167,7 +166,8 @@ class pruebas extends Controller
                  'tiposServicios'=>$tiposServicios,
                  'pedidoServicios'=>$pedidoServicios,
                  'id_usuario'=>$id_usuario,
-                 'rut'=>$rut
+                 'rut'=>$rut,
+                 'jefatura'=>$datos[0]->jefatura
             ]);
         }
         else{
