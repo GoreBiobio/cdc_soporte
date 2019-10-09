@@ -28,7 +28,7 @@ route::post('/enviaCalificacion', 'solicitudSoporte@enviaCalificacion');
 route::post('/enviaCalificacionServicio', 'solicitudSoporte@enviaCalificacionServicio');
 route::get('/dinamicos', 'pruebas@dinamicos');
 route::get('/prueba', 'pruebas@algo');
-
+route::get('/salir', 'inicio@salir');
 //route::post('/recibeRun', 'pruebas@validarExisteUsuario');
 
 route::post('/recibeSolicitud', 'solicitudSoporte@ingresaSolicitud');
