@@ -76,6 +76,8 @@
         </div>
       </div>
     </div>
+
+    @if($mostrar_recepcion ==1)
     <div class="panel box box-primary">
       <div class="box-header with-border">
         <h4 class="box-title">
@@ -93,6 +95,7 @@
         </div>
       </div>
     </div>
+    @endif
      <div class="panel box box-info">
       <div class="box-header with-border">
         <h4 class="box-title">
