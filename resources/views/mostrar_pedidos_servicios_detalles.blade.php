@@ -76,11 +76,28 @@
         </div>
       </div>
     </div>
+    <div class="panel box box-primary">
+      <div class="box-header with-border">
+        <h4 class="box-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne2" aria-expanded="false" class="collapsed">
+            Ver Observación Unidad Informática
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne2" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+        <div class="box-body">
+          <p style="color:#3c8dbc;">Observación:</p>
+          <p>{{$infoSoli[0]->obsSolServ}}</p>
+          <p style="color:#3c8dbc;">Atentido por:</p>
+          <p>{{$personal_informatica[0]->nombresFunc}} {{$personal_informatica[0]->paternoFunc}} {{$personal_informatica[0]->maternoFunc}}</p>
+        </div>
+      </div>
+    </div>
      <div class="panel box box-info">
       <div class="box-header with-border">
         <h4 class="box-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" class="collapsed">
-            Documentos Adjuntos
+           Ver Documentos Adjuntos
           </a>
         </h4>
       </div>

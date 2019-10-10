@@ -233,6 +233,7 @@ class inicio extends Controller
             ->join('servicio','servicio.idServ','=','solicitud_servicio.idServ')
             ->where([['funcSolServ','=',$id ],['estadoSolServ','15']])
             ->orWhere([['funcSolServ', $id],['estadoSolServ','16']])
+            ->orWhere([['funcSolServ', $id],['estadoSolServ','17']])
           ->get();
           return view('mostrar_pedidos_servicios',[
             'datosSolicitudes'=>$pedidos
@@ -242,6 +243,8 @@ class inicio extends Controller
     }
 
         public function verDetalleSolicitudServicio(Request $request){
+
+        $id_funcionario = $_SESSION["id_usuario"];
         $mostrar_recepcion = 0;
         $idFunc = $request->input("idFunc");
         $idSolServ = $request->input("idSolServ");
@@ -251,7 +254,7 @@ class inicio extends Controller
             ->join('servicio','servicio.idServ','=','solicitud_servicio.idServ')
             ->join('estados','estados.idEstado','=','solicitud_servicio.estadoSolServ')
             ->where([
-                ['idFunc','=',$idFunc ],
+                ['idFunc','=',$id_funcionario],
                 ['idSolServ','=',$idSolServ]
             ])
           ->get(); 
@@ -262,10 +265,18 @@ class inicio extends Controller
                 ['nivelDoc','=','servicio']
             ])
          ->get();
+
+        $personal_informatica = DB::table('solicitud_servicio')
+        ->select('nombresFunc','paternoFunc','maternoFunc','anexoFunc')
+        ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcRespoSolServ')
+        ->where([['solicitud_servicio.idSolServ','=',$idSolServ]])
+        ->get();
+        
          return view('mostrar_pedidos_servicios_detalles',[
             'infoSoli'=>$pedidos,
             'mostrar_recepcion'=>$mostrar_recepcion,
-            'adjuntos'=>$adjuntos
+            'adjuntos'=>$adjuntos,
+            'personal_informatica'=>$personal_informatica
           ]);
 
 

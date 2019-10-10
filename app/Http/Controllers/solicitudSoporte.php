@@ -289,8 +289,7 @@ class solicitudSoporte extends Controller
 
     public function recepcionaSolicitudServicio(Request $request){
 
-
-
+      $id_funcionario = $_SESSION["id_usuario"];
       $idFunc = $request->input("id_funcionario");
       $idServ = $request->input("id_solicitud");
  
@@ -301,7 +300,7 @@ class solicitudSoporte extends Controller
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcSolServ')
             ->join('estados', 'estados.idEstado', '=', 'solicitud_servicio.estadoSolServ')
             ->where([
-                ['solicitud_servicio.funcSolServ','=',$idFunc],
+                ['solicitud_servicio.funcSolServ','=',$id_funcionario],
                 ['solicitud_servicio.idSolServ','=',$idServ]
             ])
           ->get();
@@ -315,11 +314,19 @@ class solicitudSoporte extends Controller
                 ['nivelDoc','=','servicio']
             ])
          ->get();
+
+         $personal_informatica = DB::table('solicitud_servicio')
+        ->select('nombresFunc','paternoFunc','maternoFunc','anexoFunc')
+        ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcRespoSolServ')
+        ->where([['solicitud_servicio.idSolServ','=',$idServ]])
+        ->get();
+
          return view('mostrar_pedidos_servicios_detalles',[
             'infoSoli'=>$pedidos,
             'mostrar_recepcion'=>$mostrar_recepcion,
             'tipos_evaluacion'=>$tipos_evaluacion,
-            'adjuntos'=>$adjuntos
+            'adjuntos'=>$adjuntos,
+            'personal_informatica'=>$personal_informatica
           ]);
 
     }
