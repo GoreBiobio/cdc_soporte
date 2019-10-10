@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    @if($mostrar_recepcion ==1)
+    @if(isset($personal_informatica) and count($personal_informatica)>0)
     <div class="panel box box-primary">
       <div class="box-header with-border">
         <h4 class="box-title">

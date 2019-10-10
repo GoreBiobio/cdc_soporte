@@ -167,14 +167,24 @@ class inicio extends Controller
                 ['evaluaciones_soportes.tipoEval','=','servicio']
             ])
           ->get(); 
+
+        $adjuntos =  DB::table('documentos')
+         ->where([
+                ['subnivelDoc','=',$idServ],
+                ['nivelDoc','=','servicio']
+            ])
+         ->get();
+ 
         
         $personal_informatica = DB::table('solicitud_servicio')
         ->select('nombresFunc','paternoFunc','maternoFunc','anexoFunc')
         ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcRespoSolServ')
         ->where([['solicitud_servicio.idSolServ','=',$idServ]])
         ->get();   
-         return view('mostrar_servicios_terminados_detalle',[
+         return view('mostrar_pedidos_servicios_detalles',[
             'infoSoli'=>$pedidos,
+            'mostrar_recepcion'=>'0',
+            'adjuntos'=>$adjuntos,
             'personal_informatica'=>$personal_informatica
           ]);
 
