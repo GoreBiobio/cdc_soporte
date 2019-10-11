@@ -26,9 +26,10 @@ class inicio extends Controller
 		    	$_SESSION["rut"]=$rut;
 		    	$numero_solicitudes = cargar_datos($rut);
                 $_SESSION["id_usuario"]=$numero_solicitudes[0];
-    			return view('inicio',[
+    		return view('inicio',[
     		'soportes' => $numero_solicitudes[1],
     		'id'=>$numero_solicitudes[0],
+            'incidencias'=>$numero_solicitudes[6],
     		'soportes_terminados'=> $numero_solicitudes[2],
     		'soportes_pendientes'=> $numero_solicitudes[3],
             'servicios_pendientes'=>$numero_solicitudes[4],
@@ -57,6 +58,7 @@ class inicio extends Controller
     	return view('inicio',[
     		'soportes' => $numero_solicitudes[1],
     		'id'=>$numero_solicitudes[0],
+            'incidencias'=>$numero_solicitudes[6],
     		'soportes_terminados'=> $numero_solicitudes[2],
     		'soportes_pendientes'=> $numero_solicitudes[3],
              'servicios_pendientes'=>$numero_solicitudes[4],
@@ -324,7 +326,13 @@ class inicio extends Controller
         ->where([['funcSolServ', $idFunc],['estadoSolServ','18']])
         ->orWhere([['funcSolServ', $idFunc],['estadoSolServ','19']])
         ->count();
-    	array_push($arrayDatos,$idFunc,$solicitudes,$solicitudes_terminadas,$solicitudes_pendientes,$servicios_pendientes,$servicios_terminados);
+
+        $mostrar_incidencias = DB::table('incidencias')
+        ->select('*')
+        ->join('sistema', 'sistema.id_sis', '=', 'incidencias.servAfectado')
+        ->where('publicaIncid', '=', '1')
+        ->get();
+    	array_push($arrayDatos,$idFunc,$solicitudes,$solicitudes_terminadas,$solicitudes_pendientes,$servicios_pendientes,$servicios_terminados,$mostrar_incidencias);
     	return $arrayDatos;
     }
 

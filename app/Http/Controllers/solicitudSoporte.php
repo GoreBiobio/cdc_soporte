@@ -178,6 +178,8 @@ class solicitudSoporte extends Controller
           $solicitud->estadoCritSolServ = $criticidad;
           $solicitud->estadoSolServ = $estadoSolServ;
           $solicitud->funcSolServ=$id_usuario;
+          $solicitud->tipoSolServB='Pendiente';
+          $solicitud->tipoSolServC='Pendiente';
 
           $solicitud->save();
       

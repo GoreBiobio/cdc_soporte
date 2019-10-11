@@ -158,6 +158,14 @@ class pruebas extends Controller
             ])
           ->get();  
         $id_usuario = $datos[0]->idFunc;
+
+
+        $mostrar_incidencias = DB::table('incidencias')
+        ->select('*')
+        ->join('sistema', 'sistema.id_sis', '=', 'incidencias.servAfectado')
+        ->where('publicaIncid', '=', '1')
+        ->get();
+
         if(count($datos)> 0){
         	return view('vistasSolicitudesSoporte.listadoHard',
                 ['datosUsuario'=> $datos,
@@ -167,6 +175,7 @@ class pruebas extends Controller
                  'pedidoServicios'=>$pedidoServicios,
                  'id_usuario'=>$id_usuario,
                  'rut'=>$rut,
+                 'incidencias'=>$mostrar_incidencias,
                  'jefatura'=>$datos[0]->jefatura
             ]);
         }

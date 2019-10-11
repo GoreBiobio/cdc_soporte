@@ -37,6 +37,11 @@ $.ajax({
 }
 </script>
 <input type="hidden" name="id" id="id" value="{{$id}}">
+    <div class="col-md-12">
+      <h4 class="text-primary"><marquee behavior="scroll" direction="left">
+        @foreach ($incidencias as $indexKey => $incidencia)<i class="fa fa-fw fa-genderless"></i> {{$incidencia->nombre_sis}} [{{ date('d-m-Y', strtotime($incidencia->fecIncid)) }}] : {{$incidencia->descIncid}}  
+      @endforeach</marquee></h4>
+</div>
 <div class="col-lg-3 col-xs-6 ">
           <div class="small-box bg-aqua">
             <div class="inner">
@@ -51,6 +56,7 @@ $.ajax({
             </a>
           </div>
         </div>
+
 <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
@@ -96,9 +102,8 @@ $.ajax({
           </div>
         </div> 
 
-<div class="col-md-12" id="muestra_detalle">
-	
 
+<div class="col-md-12" id="muestra_detalle">
 
 </div>                       
 @endsection
