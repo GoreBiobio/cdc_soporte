@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST','owa.gorebiobio.cl'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,9 +55,9 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+       'from' =>[
+        'address' => env('MAIL_FROM_ADDRESS', 'plataforma2@gorebiobio.cl'),
+        'name' => env ('MAIL_FROM_NAME', 'Plataforma Informatica'),
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'null'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env( 'MAIL_USERNAME', 'null'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env( 'MAIL_PASSWORD', 'null'),
 
     /*
     |--------------------------------------------------------------------------

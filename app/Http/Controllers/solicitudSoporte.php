@@ -7,6 +7,8 @@ use DateTime;
 use DB;
 use App\solicitud_servicio;
 use App\solicitudsoportes;
+use App\Mail\PeticionSoporte;
+use Illuminate\Support\Facades\Mail;
 session_start();
 class solicitudSoporte extends Controller
 {
@@ -163,6 +165,10 @@ class solicitudSoporte extends Controller
     public function enviaSolicitudServicio(Request $request)
     {
 
+        
+
+
+          $adjuntos = 0;
           $fecha = new DateTime;
           $id_usuario = $_SESSION['id_usuario'];
           $servicio = $request->input("motivo_solicitud_servicio");
@@ -189,7 +195,7 @@ class solicitudSoporte extends Controller
           $file = $request->file('file');
 
           if(isset($file)){
-
+              $adjuntos = 1;
               foreach ($file as $key => $value) {
               $nombre = $file[$key]->getClientOriginalName();
               $archivo = $file[$key];
@@ -207,6 +213,51 @@ class solicitudSoporte extends Controller
             } 
 
           }
+          
+
+          $datos_usuario = datosFuncionariosId($id_usuario);
+
+
+          $nombre_funcionario = $datos_usuario[0]->nombresFunc.' '.$datos_usuario[0]->paternoFunc.' '.$datos_usuario[0]->paternoFunc;
+          $email = $datos_usuario[0]->correoFunc;
+          $anexo_funcionario= $datos_usuario[0]->anexoFunc;
+
+          $nombre_servicio = DB::table('servicio')
+            ->where([
+                ['servicio.idServ','=',$id_serv]
+            ])
+          ->get();
+          $servicio_solicitado = $nombre_servicio[0]->servicio;
+          $fecha_email =$fecha->format('d-m-Y H:i');
+          $mailData = array(
+            'fecCreaSop' => $fecha_email,
+            'name' => $nombre_funcionario,
+            'email'=> $email,
+            'anexo'=> $anexo_funcionario,
+            'nombre_servicio'=> $servicio_solicitado,
+            'ajuntos'=> $adjuntos,
+            'motivo'=> $servicio,
+          );
+
+
+          /*return view('mails.correoPeticion',
+                ['data'=>$mailData
+            ]); */
+      
+
+
+          try {
+          Mail::to('informatica@gorebiobio.cl')
+          ->send(new PeticionSoporte($mailData));
+
+          } catch (\Exception $e) {
+
+            session()->put('warning','No se ha enviado correo de notificación favor comunicar a unidad informatica');
+
+     
+          }
+        
+
         session()->put('success','Se ha ingresado su solicitud con exito.');
         return back(); 
         $id_func = $id_func;

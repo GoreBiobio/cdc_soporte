@@ -7,6 +7,10 @@
 @section('main-content')
 
 <script type="text/javascript">
+
+  function actualizar(){location.reload(true);}
+
+  setInterval("actualizar()",600000);
 	
 function cargar_detalle(opcion){
 
