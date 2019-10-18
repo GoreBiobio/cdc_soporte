@@ -23,6 +23,7 @@
                     <th>Servicio</th>
                     <th>Ver Solicitud</th>
                     <th>Estado</th>
+                    <th>Evaluar</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -46,6 +47,16 @@
                       @else
                       {{$datosSolicitudes->nombreEstado}}
                     @endif
+                  </td>
+                    <td style="text-align: center;">
+                     @if($datosSolicitudes->estadoSolServ == 17)
+                        <a type="button" class="btn btn-success btn-xs"
+                           alt="recepcionar_sevicio"
+                           rel="{{$datosSolicitudes->idSolServ}}"
+                           onclick="cargar_datos_modal('Recepcionar Solicitud Servicio','id_solicitud|id_funcionario','{{$datosSolicitudes->idSolServ}}|{{$datosSolicitudes->idFunc}}','recepcionarSolicitudServicio')">Finalizar
+                            y Evaluar</a>
+                    @endif
+                    </td>
                   </tr>
                   @endif
                   @endforeach 

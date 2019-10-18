@@ -373,7 +373,7 @@ class solicitudSoporte extends Controller
         ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcRespoSolServ')
         ->where([['solicitud_servicio.idSolServ','=',$idServ]])
         ->get();
-
+        
          return view('mostrar_pedidos_servicios_detalles',[
             'infoSoli'=>$pedidos,
             'mostrar_recepcion'=>$mostrar_recepcion,

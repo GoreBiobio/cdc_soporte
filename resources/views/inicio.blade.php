@@ -40,11 +40,23 @@ $.ajax({
 });
 }
 </script>
-<input type="hidden" name="id" id="id" value="{{$id}}">
+
+<!--<input type="hidden" name="id" id="id" value="{{$id}}">
     <div class="col-md-12">
       <h4 class="text-primary"><marquee behavior="scroll" direction="left">
         @foreach ($incidencias as $indexKey => $incidencia)<i class="fa fa-fw fa-genderless"></i> {{$incidencia->nombre_sis}} [{{ date('d-m-Y', strtotime($incidencia->fecIncid)) }}] : {{$incidencia->descIncid}}  
       @endforeach</marquee></h4>
+-->
+
+<div class="callout callout-warning">
+    <h4><i class="icon fa fa-warning"></i> Incidencias Activas de Informática</h4>
+    <p class="text-primary" style="color:#fbffff;">
+        <marquee behavior="Slide" direction="left">
+            @foreach ($incidencias as $indexKey => $incidencia)<i
+                    class="fa fa-exclamation"></i> {{$incidencia->nombre_sis}}
+            [{{ date('d-m-Y', strtotime($incidencia->fecIncid)) }}] : {{$incidencia->descIncid}}
+            @endforeach</marquee>
+    </p>
 </div>
 <div class="col-lg-3 col-xs-6 ">
           <div class="small-box bg-aqua">

@@ -76,27 +76,7 @@
         </div>
       </div>
     </div>
-
-    @if(isset($personal_informatica) and count($personal_informatica)>0)
-    <div class="panel box box-primary">
-      <div class="box-header with-border">
-        <h4 class="box-title">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne2" aria-expanded="false" class="collapsed">
-            Ver Observación Unidad Informática
-          </a>
-        </h4>
-      </div>
-      <div id="collapseOne2" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-        <div class="box-body">
-          <p style="color:#3c8dbc;">Observación:</p>
-          <p>{{$infoSoli[0]->obsSolServ}}</p>
-          <p style="color:#3c8dbc;">Atentido por:</p>
-          <p>{{$personal_informatica[0]->nombresFunc}} {{$personal_informatica[0]->paternoFunc}} {{$personal_informatica[0]->maternoFunc}}</p>
-        </div>
-      </div>
-    </div>
-    @endif
-     <div class="panel box box-info">
+    <div class="panel box box-info">
       <div class="box-header with-border">
         <h4 class="box-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" class="collapsed">
@@ -126,8 +106,48 @@
         </div>
       </div>
     </div>
-
-
+    @if(isset($personal_informatica) and count($personal_informatica)>0)
+    <div class="panel box box-primary">
+      <div class="box-header with-border">
+        <h4 class="box-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne2" aria-expanded="false" class="collapsed">
+            Ver Observación Unidad Informática
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne2" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+        <div class="box-body">
+          <p style="color:#3c8dbc;">Observación:</p>
+          <p>{{$infoSoli[0]->obsCierreSolServ}}</p>
+          <p style="color:#3c8dbc;">Atentido por:</p>
+          <p>{{$personal_informatica[0]->nombresFunc}} {{$personal_informatica[0]->paternoFunc}} {{$personal_informatica[0]->maternoFunc}}</p>
+        </div>
+      </div>
+    </div>
+    @endif
+    @if(isset($infoSoli[0]->nombreTev) and count($infoSoli[0]->nombreTev)>0)
+    <div class="panel box box-success">
+      <div class="box-header with-border">
+        <h4 class="box-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" class="collapsed">
+            Ver Evaluación a Solicitud
+          </a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+        <div class="box-body">
+          <b>Calificación:</b>
+          <p>{{$infoSoli[0]->nombreTev}}</p> 
+          <b>Observacion:</b>
+          @if($infoSoli[0]->obsEval != '')
+          <p>{{$infoSoli[0]->obsEval}}</p> 
+          @else
+          <p>Sin Observación</p>
+          @endif
+        </div>
+      </div>
+    </div>
+    @endif
   </div>
 </div>
 
