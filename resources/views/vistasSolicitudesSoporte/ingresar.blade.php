@@ -6,6 +6,15 @@
 <script type="text/javascript">
 
 
+    $(document).ready(function() {
+      $("#form1").keypress(function(e) {
+          if (e.which == 13) {
+              return false;
+          }
+      });
+    });
+
+
     function validarRut(rut) {
         if (Rut(rut)) {
             window.document.form1.submit();
@@ -168,7 +177,7 @@
             <br>
             <b><small>Ingresar sin puntos, ni guión</small></b>
 
-        <form action="recibeRun" method="post" name="form1">
+        <form action="recibeRun" method="post" name="form1" class="noenter">
             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}"/>
             <div class="form-group has-feedback">
                 <input type="text" name="rut" id="rut" class="form-control" placeholder="11.111.111-1"

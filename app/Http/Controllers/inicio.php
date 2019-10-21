@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use DateTime;
 session_start();
 class inicio extends Controller
 {
@@ -26,6 +27,23 @@ class inicio extends Controller
 		    	$_SESSION["rut"]=$rut;
 		    	$numero_solicitudes = cargar_datos($rut);
                 $_SESSION["id_usuario"]=$numero_solicitudes[0];
+
+        $sin_incidencias = DB::table('incidencias')
+            ->select('idIncid','descIncid','detalleIncid','servAfectado','estadoIncid','publicaIncid')
+            ->where([
+                ['idIncid','=','1']
+            ])
+          ->get();
+            $color = "callout-warning";
+            $icono = "fa-warning";
+            $bien = "0";
+            if($sin_incidencias[0]->publicaIncid == 1){
+                $icono = 'fa-info-circle';
+                $color = 'callout-success';
+                $bien = "1";
+            }     
+            $fecha = new DateTime;
+            $hoy = date_format($fecha, 'd-m-Y');
     		return view('inicio',[
     		'soportes' => $numero_solicitudes[1],
     		'id'=>$numero_solicitudes[0],
@@ -33,9 +51,13 @@ class inicio extends Controller
     		'soportes_terminados'=> $numero_solicitudes[2],
     		'soportes_pendientes'=> $numero_solicitudes[3],
             'servicios_pendientes'=>$numero_solicitudes[4],
-            'servicios_terminados'=>$numero_solicitudes[5]
+            'servicios_terminados'=>$numero_solicitudes[5],
+            'color'=>$color,
+            'icono'=>$icono,
+            'bien'=>$bien,
+            'hoy'=>$hoy
     	]);
-	     }
+	   }
     }
 
     public function salir(){
@@ -55,15 +77,36 @@ class inicio extends Controller
     	
         $rut = $_SESSION['rut'];
     	$numero_solicitudes = cargar_datos($rut);
-    	return view('inicio',[
-    		'soportes' => $numero_solicitudes[1],
-    		'id'=>$numero_solicitudes[0],
+        
+    	$sin_incidencias = DB::table('incidencias')
+            ->select('idIncid','descIncid','detalleIncid','servAfectado','estadoIncid','publicaIncid')
+            ->where([
+                ['idIncid','=','1']
+            ])
+          ->get();
+            $color = "callout-warning";
+            $icono = "fa-warning";
+            $bien = "0";
+            if($sin_incidencias[0]->publicaIncid == 1){
+                $icono = 'fa-info-circle';
+                $color = 'callout-success';
+                $bien = "1";
+            }     
+            $fecha = new DateTime;
+            $hoy = date_format($fecha, 'd-m-Y');
+            return view('inicio',[
+            'soportes' => $numero_solicitudes[1],
+            'id'=>$numero_solicitudes[0],
             'incidencias'=>$numero_solicitudes[6],
-    		'soportes_terminados'=> $numero_solicitudes[2],
-    		'soportes_pendientes'=> $numero_solicitudes[3],
-             'servicios_pendientes'=>$numero_solicitudes[4],
-            'servicios_terminados'=>$numero_solicitudes[5]
-    	]);
+            'soportes_terminados'=> $numero_solicitudes[2],
+            'soportes_pendientes'=> $numero_solicitudes[3],
+            'servicios_pendientes'=>$numero_solicitudes[4],
+            'servicios_terminados'=>$numero_solicitudes[5],
+            'color'=>$color,
+            'icono'=>$icono,
+            'bien'=>$bien,
+            'hoy'=>$hoy
+        ]);
     }
 
      public function mostrar_pedidos_soportes(Request $request)

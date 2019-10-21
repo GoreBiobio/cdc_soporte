@@ -1,5 +1,43 @@
 <script type="text/javascript">
+
+    jQuery(function($) {
+
+    $( ".bs-wizard-step" ).addClass( "disabled" );
+    var estado = '{{$infoSoli[0]->idEstado}}';
+
+    if(estado == 15 || estado == 16 ||estado == 17 || estado == 18 || estado == 19){
+
+        $( "#padso_1" ).removeClass( "disabled" );
+        $( "#padso_1" ).addClass( "complete" );  
+        
+    }
+
+    if(estado == 16 ||estado == 17 || estado == 18 || estado == 19){
+        $( "#padso_2" ).removeClass( "disabled" );
+        $( "#padso_2" ).addClass( "complete" ); 
+    }
+
+     if(estado == 17 || estado == 18 || estado == 19){
+        $( "#padso_3" ).removeClass( "disabled" );
+        $( "#padso_3" ).addClass( "complete" );     
+    }
+
+      if(estado == 18 || estado == 19){
+        $( "#padso_4" ).removeClass( "disabled" );
+        $( "#padso_4" ).addClass( "complete" );     
+    }
+
+    if(estado == 19){
+        $( "#padso_5" ).removeClass( "disabled" );
+        $( "#padso_5" ).addClass( "complete" );     
+    }
+
+
+    });
     function enviarEvaluacionServicio() {
+
+
+
         if ($('#obs').val() == '') {
 
             var x = function callback() {
@@ -21,8 +59,6 @@
 
 
 </script>
-
-
 <div class="box">
     <div class="box-body">
         <div class="row">
@@ -54,11 +90,51 @@
             <div class="clearfix "></div>
         </div>
     </div>
-
-   
-
+</div>
+   <div class="row">     
+        
+            <div class="row bs-wizard" style="border-bottom:0;">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-2 bs-wizard-step " id="padso_1">
+                  <div class="text-center bs-wizard-stepnum">1</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Ingreso de Solicitud</div>
+                </div>
+                
+                <div class="col-xs-2 bs-wizard-step " id="padso_2">
+                  <div class="text-center bs-wizard-stepnum">2</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Asignado a profesional Informática</div>
+                </div>
+                
+                <div class="col-xs-2 bs-wizard-step " id="padso_3">
+                  <div class="text-center bs-wizard-stepnum">3</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center" id="padso_1">Soporte Realizado</div>
+                </div>
+                
+                <div class="col-xs-2 bs-wizard-step " id="padso_4">
+                  <div class="text-center bs-wizard-stepnum">4</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Soporte Evaluado</div>
+                </div>
+                <div class="col-xs-2 bs-wizard-step " id="padso_5">
+                  <div class="text-center bs-wizard-stepnum">5</div>
+                  <div class="progress"><div class="progress-bar"></div></div>
+                  <a href="#" class="bs-wizard-dot"></a>
+                  <div class="bs-wizard-info text-center">Soporte Archivado</div>
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+    </div>        
 </div>
 
+
+           
 <div class="box-body">
   <div class="box-group" id="accordion">
     <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
@@ -66,7 +142,7 @@
       <div class="box-header with-border">
         <h4 class="box-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
-            Ver Motivo de Solitud
+            <i class="fa fa-fw fa-commenting-o"></i> Ver Motivo de Solitud
           </a>
         </h4>
       </div>
@@ -80,7 +156,7 @@
       <div class="box-header with-border">
         <h4 class="box-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" class="collapsed">
-           Ver Documentos Adjuntos
+           <i class="fa fa-fw fa-file-o"></i> Ver Documentos Adjuntos
           </a>
         </h4>
       </div>
@@ -111,7 +187,7 @@
       <div class="box-header with-border">
         <h4 class="box-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne2" aria-expanded="false" class="collapsed">
-            Ver Observación Unidad Informática
+            <i class="fa fa-fw fa-pencil-square-o"></i> Ver Observación Unidad Informática
           </a>
         </h4>
       </div>
@@ -130,7 +206,7 @@
       <div class="box-header with-border">
         <h4 class="box-title">
           <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" class="collapsed">
-            Ver Evaluación a Solicitud
+            <i class="fa fa-fw fa-balance-scale"></i> Ver Evaluación a Solicitud
           </a>
         </h4>
       </div>

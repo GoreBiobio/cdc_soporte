@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Excel;
+use DateTime;
 
 class pruebas extends Controller
 {
@@ -131,6 +132,23 @@ class pruebas extends Controller
             ])
             ->get();
 
+        $sin_incidencias = DB::table('incidencias')
+            ->select('idIncid','descIncid','detalleIncid','servAfectado','estadoIncid','publicaIncid')
+            ->where([
+                ['idIncid','=','1']
+            ])
+          ->get();
+            $color = "callout-warning";
+            $icono = "fa-warning";
+            $bien = "0";
+            if($sin_incidencias[0]->publicaIncid == 1){
+                $icono = 'fa-info-circle';
+                $color = 'callout-success';
+                $bien = "1";
+            }     
+            $fecha = new DateTime;
+            $hoy = date_format($fecha, 'd-m-Y');
+
         $pedidos = DB::table('solicitudsoportes')
             ->select('*')
             ->join('hardwares', 'hardwares.idHard', '=', 'solicitudsoportes.hardSop')
@@ -176,7 +194,11 @@ class pruebas extends Controller
                  'id_usuario'=>$id_usuario,
                  'rut'=>$rut,
                  'incidencias'=>$mostrar_incidencias,
-                 'jefatura'=>$datos[0]->jefatura
+                 'jefatura'=>$datos[0]->jefatura,
+                 'color'=>$color,
+                 'icono'=>$icono,
+                 'bien'=>$bien,
+                 'hoy'=>$hoy
             ]);
         }
         else{

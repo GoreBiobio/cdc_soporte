@@ -11,11 +11,13 @@
 
     jQuery(function($) {
       $(document).on('click', 'span[rel="borrar"]' , function(e){
-        $(this).parent().parent().remove();
+
+        
+        $(this).parent().parent().parent().parent().remove();
     })
 
     });
-
+ 
 	function enviarServicio(){
 
      var envia = true;     
@@ -67,10 +69,11 @@
 
   function agregar_adjuntos(){
 
-    var agrega = $("#adjuntas").html();
-    $("#adjuntosAqui").append(agrega);
-
-
+    var $divs = $(".agregar_tabla").toArray().length;
+    if($divs < 6){
+      var agrega = $("#adjuntas").html();
+       $("#adjuntosAqui").append(agrega);
+    }
   }
 </script> 
 <form class="form-horizontal" name="servicio" id="servicio" method="post" action="recibeSolicitudServicio" enctype="multipart/form-data">
@@ -121,11 +124,11 @@
   </div>
 </form>
 
-<div style="display: none;">
-<table id="adjuntas">
+<div style="display: none;" id="adjuntas">
+<table class="agregar_tabla">
   <tbody>
     <tr>
-      <td><input type="file" class="form-control" name="file[]" ></td>
+      <td width="80%"><input type="file" class="form-control" name="file[]" ></td>
       <td><span type="button" class="btn btn-info" rel="borrar" ><i class="fa  fa-trash-o"></i></span></td>
     </tr>
     </tbody>
