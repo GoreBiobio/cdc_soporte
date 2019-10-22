@@ -162,7 +162,7 @@
       </div>
       <div id="collapse2" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
         <div class="box-body">
-          @if (count($adjuntos)>0)
+          @if (isset($adjuntos) and count($adjuntos)>0)
             <div class="box">
                 <div class="box-body">
                     adjuntos: 
@@ -172,7 +172,6 @@
                             {{$adjuntos->nombreDoc}}
                         </button>
                     </a>
-                       
                     @endforeach
                  </div>
             </div>
@@ -201,7 +200,7 @@
       </div>
     </div>
     @endif
-    @if(isset($infoSoli[0]->nombreTev) and count($infoSoli[0]->nombreTev)>0)
+    @if(isset($evaluacion) and count($evaluacion)>0)
     <div class="panel box box-success">
       <div class="box-header with-border">
         <h4 class="box-title">
@@ -213,10 +212,10 @@
       <div id="collapse3" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
         <div class="box-body">
           <b>Calificación:</b>
-          <p>{{$infoSoli[0]->nombreTev}}</p> 
+          <p>{{$evaluacion[0]->nombreTev}}</p> 
           <b>Observacion:</b>
-          @if($infoSoli[0]->obsEval != '')
-          <p>{{$infoSoli[0]->obsEval}}</p> 
+          @if($evaluacion[0]->obsEval != '')
+          <p>{{$evaluacion[0]->obsEval}}</p> 
           @else
           <p>Sin Observación</p>
           @endif

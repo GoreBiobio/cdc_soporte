@@ -203,15 +203,13 @@ class inicio extends Controller
             ->select('*')
             ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcSolServ')
-            ->join('evaluaciones_soportes', 'evaluaciones_soportes.idSolSop', '=' ,'solicitud_servicio.idSolServ')
-            ->join('tipos_evaluacion', 'tipos_evaluacion.idTev', '=' ,'evaluaciones_soportes.calificacionEval')
             ->join('estados','estados.idEstado', '=' ,'solicitud_servicio.estadoSolServ')
             ->where([
                 ['solicitud_servicio.funcSolServ','=',$idFunc],
-                ['solicitud_servicio.idSolServ','=',$idServ],
-                ['evaluaciones_soportes.tipoEval','=','servicio']
+                ['solicitud_servicio.idSolServ','=',$idServ]
             ])
           ->get(); 
+
 
         $adjuntos =  DB::table('documentos')
          ->where([
@@ -219,8 +217,16 @@ class inicio extends Controller
                 ['nivelDoc','=','servicio']
             ])
          ->get();
- 
-        
+
+         $evaluacion_usuario = DB::table('evaluaciones_soportes')
+            ->select('*')
+            ->join('tipos_evaluacion', 'tipos_evaluacion.idTev', '=' ,'evaluaciones_soportes.calificacionEval')
+            ->where([
+                ['evaluaciones_soportes.idSolSop','=',$idServ],
+                ['evaluaciones_soportes.tipoEval','=','servicio']
+            ])
+          ->get();  
+
         $personal_informatica = DB::table('solicitud_servicio')
         ->select('nombresFunc','paternoFunc','maternoFunc','anexoFunc')
         ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcRespoSolServ')
@@ -230,7 +236,8 @@ class inicio extends Controller
             'infoSoli'=>$pedidos,
             'mostrar_recepcion'=>'0',
             'adjuntos'=>$adjuntos,
-            'personal_informatica'=>$personal_informatica
+            'personal_informatica'=>$personal_informatica,
+            'evaluacion'=>$evaluacion_usuario
           ]);
 
 
