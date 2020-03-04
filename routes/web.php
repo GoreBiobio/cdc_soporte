@@ -59,6 +59,52 @@ route::get('/consulta_servicios_pedidos', 'inicio@mostrar_pedidos_servicios');
 route::get('/verDetalleSolicitudServicio', 'inicio@verDetalleSolicitudServicio');
 
 
+
+/*inicio permisos*/
+/*
+route::get('/registrar_cometido', 'CometidosController@registrarCometido');
+route::get('/cometido_funcional', 'CometidosController@cometidoFuncional');
+route::get('/gestionar_cometido_funcional', 'CometidosController@gestionarCometidoFuncional');
+route::get('/cargar_valor_cometido', 'CometidosController@cargarValorCometido');
+route::get('/carga_provincia', 'CometidosController@carga_provincia');
+route::get('/carga_provincia_seleccionada', 'CometidosController@carga_provincia_seleccionada');
+route::get('/carga_comuna', 'CometidosController@carga_comuna');
+route::get('/carga_comuna_seleccionada', 'CometidosController@carga_comuna_seleccionada');
+route::get('/comprobar_viatico', 'CometidosController@comprobar_viatico');
+route::get('/carga_valores', 'CometidosController@carga_valores');
+route::post('/envia_viatico', 'CometidosController@envia_viatico');
+route::get('/excel_cometidos', 'CometidosController@excel_cometidos');
+route::get('cometido-pdf', 'CometidosController@pdf_cometido');
+route::get('pdf_cometido_ver', 'CometidosController@pdf_cometido_ver');
+route::get('consulta_cometido', 'CometidosController@consulta_cometido');
+route::get('consulta_cometido_modal', 'CometidosController@consulta_cometido_modal');
+route::get('consultar_cometido_modal', 'CometidosController@consultar_cometido_modal');
+route::post('busca_cometidos','CometidosController@busca_cometidos');
+
+
+
+route::get('/permisos', 'PermisosController@permisos');
+route::get('/solicitar_permiso_administrativo', 'PermisosController@permiso_administrativo');
+route::get('/solicitar_feriado_legal','PermisosController@registra_feriado');
+route::post('/guarda_solicitud_feriado_legal','PermisosController@guardar_solicitud_feriado_legal');
+route::post('/guarda_solicitud_permiso_administrativo','PermisosController@guardar_solicitud_permiso_administrativo');
+route::get('/anular_solicitud_permiso_administrativo','PermisosController@anular_solicitud_permiso_administrativo');
+route::get('/anular_solicitud_feriado_legal','PermisosController@anular_solicitud_feriado_legal');
+route::get('/gestionar_solicitudes_permisos','PermisosController@gestionar_solicitudes_permisos');
+route::get('/solicitar_descanso_complementario','PermisosController@solicitar_descanso_complementario');
+route::post('/guarda_solicitud_descanso_complementario','PermisosController@guarda_solicitud_descanso_complementario');
+
+
+
+
+
+
+route::get('/feriado_legal', 'PermisosController@feriado_legal');
+
+
+/*fin permisos*/
+
+*/
 route::get('/descargar2', 'pruebas@excel')->name('export_excel.excel');
 
 

@@ -38,7 +38,7 @@
                     <td>{{$datosSolicitudes->marca}}</td>
                     <td>{{$datosSolicitudes->modelo}}</td>
                     <td>    
-                      <center><span type="button" class="btn btn-primary btn-xs" onclick="cargar_datos_modal('Antecedentes Solicitud','idFunc|idSop','{{$datosSolicitudes->funcSolicSop}}|{{$datosSolicitudes->idSolSop}}','verDetalleSoporte');">
+                      <center><span type="button" class="btn btn-primary btn-xs" onclick="cargar_datos_modal('Antecedentes Solicitud','idSop','{{$datosSolicitudes->idSolSop}}','verDetalleSoporte');">
                        <i class="blue ace icon fa fa-expand"></i>
                       </span></center>
                     </td>

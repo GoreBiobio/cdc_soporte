@@ -68,7 +68,6 @@
   }
 
   function agregar_adjuntos(){
-
     var $divs = $(".agregar_tabla").toArray().length;
     if($divs < 6){
       var agrega = $("#adjuntas").html();
@@ -115,7 +114,6 @@
       <label  class="col-sm-3 control-label">PIN de Seguridad</label>
       <div class="col-sm-6" >
        <input type="password" id="pin" class="form-control" required="required" maxlength="4" name="pin">
-       <input type="hidden" name="hola" value="hola">
       </div>
     </div>
   </div>

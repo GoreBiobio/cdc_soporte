@@ -8,15 +8,19 @@
 
     function agregarAdjuntoSop(){
 
-    var agrega = $("#adjunta_soporte").html();
-    $("#´soporteAdjuntos").append(agrega);
+    var $divs = $(".adjunta_soporte").toArray().length;
+    if($divs < 6){
+      var agrega = $("#adjunta_soporte").html();
+      $("#soporteAdjuntos").append(agrega);
+    }
+   
 
 
   }
 
   function enviaSoporte(){
     var envia_soporte = true;
-    var motivo_soporte = $("#motivo_solicitud_soporte").val();
+    var motivo_soporte = $("#soporte").val();
 
     if(motivo_soporte == ''){
         makeGritter("Advertencia", "Recuerde ingresar motivo de la solicitud", "warning");
@@ -35,7 +39,6 @@
 
 <form class="form-horizontal" name="soporte_form" id="soporte_form" method="post" action="recibeSolicitud" enctype="multipart/form-data">
     {{ csrf_field() }}
-  <input type="hidden" name="id_usuario" value="{{$id_func}}">
   <input type="hidden" name="id_hard" value="{{$id_hard}}">
   <div class="box-body" id="form_enviar">
     <div class="form-group">
@@ -62,7 +65,7 @@
     </div>
         <div class="form-group">
       <label class="col-sm-3 control-label"></label>
-      <div class="col-sm-6" id="´soporteAdjuntos">
+      <div class="col-sm-6" id="soporteAdjuntos">
       </div>
     </div>
   </div>
@@ -70,11 +73,10 @@
     <button type="button" class="btn btn-info pull-right" onclick="enviaSoporte();"><i class="fa fa-send-o"></i> Guardar y Enviar a Informática</button>
   </div>
 </form>
-
 <div style="display: none;">
-<table id="adjunta_soporte">
+<table id="adjunta_soporte" >
   <tbody>
-    <tr>
+    <tr class="adjunta_soporte">
       <td><input type="file" class="form-control" name="file_soporte[]" ></td>
       <td><span type="button" class="btn btn-info" rel="borrarAdjunto" ><i class="fa  fa-trash-o"></i></span></td>
     </tr>

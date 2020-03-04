@@ -74,7 +74,7 @@ class inicio extends Controller
     public function volver_inicio(Request $request)
     {	
 
-    	
+    	validar_existe_rut();
         $rut = $_SESSION['rut'];
     	$numero_solicitudes = cargar_datos($rut);
         
@@ -133,17 +133,19 @@ class inicio extends Controller
     }
 
     public function verDetalleSoporte(Request $request){
+      
+      $idFunc = $_SESSION["id_usuario"];
+  
     	$mostrar_recepcion = 0;
-    	$idFunc = $request->input("idFunc");
     	$idSop = $request->input("idSop");
     	 $pedidos = DB::table('solicitudsoportes')
-            ->select('idSolSop','fecCreaSop','solicitudSop','numSerieHard','modelo','marca')
+            ->select('idSolSop','fecCreaSop','solicitudSop','numSerieHard','modelo','marca','idFunc')
             ->join('hardwares', 'hardwares.idHard', '=', 'solicitudsoportes.hardSop')
             ->join('modelos', 'modelos.idModelo', '=', 'hardwares.modelos_idModelo')
             ->join('marcas', 'marcas.idMarca', '=', 'modelos.marcas_idMarca')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
             ->where([
-                ['idFunc','=',$idFunc],
+                ['funcSolicSop','=',$idFunc],
                 ['idSolSop','=',$idSop]
             ])
           ->get(); 
@@ -155,6 +157,7 @@ class inicio extends Controller
                 ['nivelDoc','=','soporte']
             ])
          ->get();
+
          return view('mostrar_pedidos_soporte_detalle',[
           	'infoSoli'=>$pedidos,
           	'mostrar_recepcion'=>$mostrar_recepcion,
@@ -344,7 +347,6 @@ class inicio extends Controller
 
     }
        
-
 }
 
      function cargar_datos($rut){
@@ -400,4 +402,13 @@ class inicio extends Controller
             ])
           ->get();
         return $pedidos;
+}
+
+function validar_existe_rut(){
+
+    if(isset($_SESSION['rut'])){
+        return true;
+    }else{
+        return redirect()->to('ingresar')->send();
+    } 
 }

@@ -8,21 +8,18 @@ use DB;
 use App\solicitud_servicio;
 use App\solicitudsoportes;
 use App\Mail\PeticionSoporte;
+use App\Mail\PeticionSoporteHardware;
 use Illuminate\Support\Facades\Mail;
 session_start();
 class solicitudSoporte extends Controller
 {
 
     public function solicitaSoporte(Request $request){
-    $id_func = $request->input("id_func");  
     $id_hard = $request->input("id_hard");
         return view('vistasSolicitudesSoporte.ingresaSoporte',[
-        'id_func'=>$id_func,
         'id_hard'=>$id_hard]);
 
-
     }
-
     public function ingresaSolicitud(Request $request)
     {
 
@@ -55,9 +52,9 @@ class solicitudSoporte extends Controller
       $file = $request->file('file_soporte');
       
 
-
+      $adjuntos = 0;
       if(isset($file)){
-        
+        $adjuntos = 1;
         foreach ($file as $key => $value) {
         $nombre = $file[$key]->getClientOriginalName();
         $archivo = $file[$key];
@@ -75,6 +72,47 @@ class solicitudSoporte extends Controller
         } 
 
       }
+
+
+      $datos_usuario = datosFuncionariosId($id_usuario);
+
+
+      $nombre_funcionario = $datos_usuario[0]->nombresFunc.' '.$datos_usuario[0]->paternoFunc.' '.$datos_usuario[0]->paternoFunc;
+      $email = $datos_usuario[0]->correoFunc;
+      $anexo_funcionario= $datos_usuario[0]->anexoFunc;
+      $datos_equipo = DB::table('hardwares')
+        ->select('marca','modelo','numSerieHard')
+        ->join('modelos','modelos.idModelo','=','hardwares.modelos_idModelo')
+        ->join('marcas','marcas.idMarca','=','modelos.marcas_idMarca')
+        ->where([
+            ['hardwares.idHard','=',$id_hard]
+        ])
+      ->get();
+      $hardware = $datos_equipo[0]->marca.' / '.$datos_equipo[0]->modelo.' / '.$datos_equipo[0]->numSerieHard;
+      $fecha_email =$fecha->format('d-m-Y H:i');
+      $mailData = array(
+        'fecCreaSop' => $fecha_email,
+        'name' => $nombre_funcionario,
+        'email'=> $email,
+        'anexo'=> $anexo_funcionario,
+        'ajuntos'=> $adjuntos,
+        'motivo'=> $soporte,
+        'hardware'=> $hardware
+
+      );
+
+
+      try {
+      Mail::to('informatica@gorebiobio.cl')
+      ->send(new PeticionSoporteHardware($mailData));
+
+      } catch (\Exception $e) {
+
+        session()->put('warning','No se ha enviado correo de notificación,favor comunicar a unidad informatica');
+
+ 
+      }
+
 
        session()->put('success','Se ha ingresado su solicitud con exito.');
        return back();      
@@ -252,7 +290,7 @@ class solicitudSoporte extends Controller
 
           } catch (\Exception $e) {
 
-            session()->put('warning','No se ha enviado correo de notificación favor comunicar a unidad informatica');
+            session()->put('warning','No se ha enviado correo de notificación, favor comunicar a unidad informatica');
 
      
           }

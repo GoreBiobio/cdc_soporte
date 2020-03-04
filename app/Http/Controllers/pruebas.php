@@ -77,7 +77,25 @@ class pruebas extends Controller
        $lista = DB::select(DB::raw(
         "SELECT * FROM hardwares a JOIN modelos m on a.modelos_idModelo = m.idModelo JOIN marcas ma on ma.idMarca = m.marcas_idMarca WHERE a.idHard Not IN (SELECT id_hard FROM software_equipo WHERE idsoft = $id_consulta and  estado_seq = 1)"
        ));
+       
+       $marcas = DB::table('marcas')
+             ->get();
 
+       foreach ($marcas as $key => $value) {
+        for ($i=1; $i < 12; $i++) { 
+            $lista2 = DB::select(DB::raw(
+                "SELECT idFunc as e,nombresFunc FROM funcionarios where idFunc = $i"
+               ));
+ 
+               echo $lista2[0]->nombresFunc;
+    
+           }
+       }
+
+
+   
+          
+       
       /* $resultado =DB::select(DB::raw("SELECT idSoft, 
             nombreSoft, 
             cantidadSoft as cantidad,
@@ -96,7 +114,7 @@ class pruebas extends Controller
         (SELECT nombreTipo FROM tipos t WHERE t.idTipo = s.tipoCSoft) as nombreTipoC
         FROM softwares s"
         ));
-         dd($resultado2);
+        
 
     
     }
@@ -107,13 +125,14 @@ class pruebas extends Controller
     }
     public function algo(){
 
-        dd($_GET);
+        
         return view('vistasSolicitudesSoporte.vista_prueba');
     }
     public function validarExisteUsuario(Request $request)
     {   
         
         session_start();
+        validar_existe_rut();
         $rut = $_SESSION['rut'];
         $datos = DB::table('funcionarios')
              ->select('*')
@@ -208,5 +227,19 @@ class pruebas extends Controller
                  'rutinvalido' => $rutinvalido
             ]);
         }
+
+}
+
+}
+
+
+function validar_existe_rut(){
+
+    if(isset($_SESSION['rut'])){
+        return true;
+    }else{
+        return redirect()->to('ingresar')->send();
     }
+
+    
 }
